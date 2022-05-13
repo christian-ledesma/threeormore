@@ -67,7 +67,7 @@ def main():
             dados_ronda_jugador2 = list()
             for _ in range(NUMERO_DADOS):
                 dados_ronda_jugador1.append(Dado().tirar())
-            jugador1.dados.append([dados_ronda_jugador1])
+            jugador1.dados.append(dados_ronda_jugador1)
             sumar_puntos(jugador1, ronda)
             print(f"{jugador1.nombre} ha sacado: {dados_ronda_jugador1}")
 
