@@ -1,5 +1,6 @@
 from Dado import Dado
 from Jugador import Jugador
+from time import sleep
 
 
 RONDAS = 10
@@ -48,6 +49,13 @@ def sumar_puntos(jugador, ronda):
     jugador.sumar_puntos(puntos)
 
 
+def tirar_dados(jugador, lista_dados_ronda, ronda):
+    for _ in range(NUMERO_DADOS):
+        lista_dados_ronda.append(Dado().tirar())
+    jugador.dados.append(lista_dados_ronda)
+    sumar_puntos(jugador, ronda)
+    print(f"{jugador.nombre} ha sacado: {lista_dados_ronda}")
+
 def main():
     jugar = True
     mensaje_jugar = "¿Desea jugar? Si/No: "
@@ -65,24 +73,22 @@ def main():
             print(f"::::: Ronda: {ronda+1} :::::")
             dados_ronda_jugador1 = list()
             dados_ronda_jugador2 = list()
-            for _ in range(NUMERO_DADOS):
-                dados_ronda_jugador1.append(Dado().tirar())
-            jugador1.dados.append(dados_ronda_jugador1)
-            sumar_puntos(jugador1, ronda)
-            print(f"{jugador1.nombre} ha sacado: {dados_ronda_jugador1}")
 
-            tirar_dados = input("¿Tirar dados? ").lower()
-            if tirar_dados == "si":
-                for _ in range(NUMERO_DADOS):
-                    dados_ronda_jugador2.append(Dado().tirar())
-                jugador2.dados.append(dados_ronda_jugador2)
-                sumar_puntos(jugador2, ronda)
+            tirar_dados(jugador1, dados_ronda_jugador1, ronda)
+
+            tirar = input("¿Tirar dados? ").lower()
+            if tirar == "si":
+                tirar_dados(jugador2, dados_ronda_jugador2, ronda)
+                # for _ in range(NUMERO_DADOS):
+                #     dados_ronda_jugador2.append(Dado().tirar())
+                # jugador2.dados.append(dados_ronda_jugador2)
+                # sumar_puntos(jugador2, ronda)
             else:
                 jugador2.dados.append([])
 
-            print(f"{jugador2.nombre} ha sacado: {dados_ronda_jugador2}")
             mostrar_puntuaciones((jugador1, jugador2))
             print("---------------------------------")
+            sleep(2)
 
         mensaje_jugar = "¿Desea volver a jugar? Si/No: "
 
