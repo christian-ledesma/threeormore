@@ -79,10 +79,6 @@ def main():
             tirar = input("¿Tirar dados? ").lower()
             if tirar == "si":
                 tirar_dados(jugador2, dados_ronda_jugador2, ronda)
-                # for _ in range(NUMERO_DADOS):
-                #     dados_ronda_jugador2.append(Dado().tirar())
-                # jugador2.dados.append(dados_ronda_jugador2)
-                # sumar_puntos(jugador2, ronda)
             else:
                 jugador2.dados.append([])
 
